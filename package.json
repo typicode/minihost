@@ -2,7 +2,7 @@
   "name": "minihost",
   "version": "0.1.0",
   "description": "dev utility",
-  "main": "index.js",
+  "main": "lib/h.js",
   "bin": {
     "h": "bin/index.js"
   },
