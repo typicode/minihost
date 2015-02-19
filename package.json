@@ -1,0 +1,43 @@
+{
+  "name": "minihost",
+  "version": "0.1.0",
+  "description": "dev utility",
+  "main": "index.js",
+  "bin": {
+    "h": "bin/index.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "node test | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typicode/minihost.git"
+  },
+  "keywords": [
+    "dev",
+    "utility"
+  ],
+  "author": "Typicode <typicode@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typicode/minihost/issues"
+  },
+  "homepage": "https://github.com/typicode/minihost",
+  "dependencies": {
+    "body-parser": "^1.12.0",
+    "express": "^4.11.2",
+    "get-port": "^1.0.0",
+    "http-proxy": "^1.8.1",
+    "morgan": "^1.5.1",
+    "npmconf": "^2.1.1",
+    "request": "^2.53.0",
+    "update-notifier": "^0.3.0",
+    "yargs": "^3.0.4"
+  },
+  "devDependencies": {
+    "supertest": "^0.15.0",
+    "tap-spec": "^2.2.1",
+    "tape": "^3.5.0"
+  }
+}
