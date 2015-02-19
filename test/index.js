@@ -20,7 +20,7 @@ function h (str, cb) {
 
   setTimeout(function () {
     cb(proc)
-  }, 400)
+  }, 1000)
 }
 
 test(
