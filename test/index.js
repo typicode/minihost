@@ -33,10 +33,16 @@ test(
       }
     }
 
-    t.plan(7)
+    t.plan(8)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
+        request
+          .get('/')
+          .expect(200)
+          .expect(/minihost/)
+          .end(should('have homepage'))
+
         request
           .get('/_servers')
           .expect(200)
