@@ -36,7 +36,7 @@ npm install -g minihost
 
 ## How it works
 
-Minihost assumes that your web app binds itself to the PORT environment variable so it can properly proxy requests to your app.
+minihost assumes that your web app binds itself to the PORT environment variable so it can properly proxy requests to your app.
 
 ## License
 
