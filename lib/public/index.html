@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>minihost</title>
+</head>
+<body>
+  <ul id="servers"></ul>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script>
+    $.get('_servers', function (servers) {
+      var el = $('#servers')
+      for (var name in servers) {
+        el.append('<li><a href="/' + name + '">' + name + ' (' + servers[name] + ')</a></li>')
+      }
+    })
+  </script>
+</body>
+</html>

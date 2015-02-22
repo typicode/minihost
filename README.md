@@ -2,26 +2,41 @@
 
 [![Build Status](https://travis-ci.org/typicode/minihost.svg?branch=master)](https://travis-ci.org/typicode/minihost)
 
-When working with many dev servers, you have to increment port (e.g. http://localhost:[3000](), http://localhost:[4000](), ...) and remember on which they are.
+When working with many dev servers, you have to increment and remember ports (e.g. [http://localhost:3000](), [http://localhost:4000](), ...).
 
-With minihost, all your servers are on port [3000]().
+With minihost, you don't have to think about it. All your servers are in one place :)
 
-## Installation
+## Usage
+
+Prefix your commands with `h`
+
+```bash
+~/front$   h gulp server
+~/express$ h nodemon
+```
+
+You can then access your servers on
+
+```
+http://localhost:3000/front
+http://localhost:3000/express
+```
+
+And list them on
+
+```
+http://localhost:3000
+```
+
+## Install
 
 ```
 npm install -g minihost
 ```
 
-## Usage
+## How it works
 
-Simply prefix your commands with `h`
-
-```bash
-~/projects/express$ h nodemon
-~/projects/front$ h gulp server
-# http://localhost:3000/express
-# http://localhost:3000/front
-```
+Minihost assumes that your web app binds itself to the PORT environment variable so it can properly proxy requests to your app.
 
 ## License
 

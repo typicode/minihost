@@ -17,6 +17,7 @@ var argv = yargs
   .example('~/express$ $0 nodemon', 'http://localhost:3000/express')
   .example('~/front$ $0 gulp server', 'http://localhost:3000/front')
   .example('~/other$ $0 -n app -- nodemon', 'http://localhost:3000/app')
+  .demand(1)
   .argv
 
 updateNotifier({pkg: pkg}).notify()
