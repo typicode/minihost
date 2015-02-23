@@ -33,7 +33,7 @@ test(
       }
     }
 
-    t.plan(8)
+    t.plan(9)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
@@ -62,6 +62,13 @@ test(
           .expect(200)
           .expect('hello')
           .end(should('proxy POST'))
+
+        supertest('http://127.0.0.1:3000')
+          .get('/some/path?msg=hello')
+          .set('Host', 'one')
+          .expect(200)
+          .expect('hello')
+          .end(should('support vhost'))
 
         setTimeout(function () {
           one.kill()

@@ -34,6 +34,7 @@
     "request": "^2.53.0",
     "serve-static": "^1.9.1",
     "update-notifier": "^0.3.0",
+    "vhost": "^3.0.0",
     "yargs": "^3.0.4"
   },
   "devDependencies": {

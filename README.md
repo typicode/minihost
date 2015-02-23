@@ -28,6 +28,12 @@ And list them on
 http://localhost:3000
 ```
 
+You can also use a custom name
+
+```bash
+~$ h -n app -- node index.js
+```
+
 ## Install
 
 ```
@@ -37,6 +43,13 @@ npm install -g minihost
 ## How it works
 
 minihost assumes that your web app binds itself to the PORT environment variable so it can properly proxy requests to your app.
+
+For example:
+
+```javascript
+var port = process.env.PORT || defaultPort;
+app.listen(port);
+```
 
 ## License
 
