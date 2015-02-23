@@ -8,7 +8,7 @@ With minihost, you don't have to think about it. All your servers are in one pla
 
 ## Usage
 
-Prefix your commands with `h`
+Simply prefix your commands with `h`
 
 ```bash
 ~/front$   h gulp server
@@ -22,16 +22,17 @@ http://localhost:3000/front
 http://localhost:3000/express
 ```
 
-And list them on
+To list running servers, go to
 
 ```
 http://localhost:3000
 ```
 
-You can also use a custom name
+To use a custom name, add `-n` option
 
 ```bash
-~$ h -n app -- node index.js
+~/express$ h -n api -- node index.js
+http://localhost:3000/api
 ```
 
 ## Install
