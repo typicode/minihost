@@ -3,7 +3,7 @@ var supertest = require('supertest')
 var test = require('tape')
 var pkg = require('../package.json')
 
-var request = supertest('http://localhost:3000')
+var request = supertest('http://127.0.0.1:3000')
 
 function h (str, cb) {
   var args = [__dirname + '/../' + pkg.bin.h].concat(str.split(' '))
@@ -33,7 +33,7 @@ test(
       }
     }
 
-    t.plan(10)
+    t.plan(7)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
@@ -51,26 +51,6 @@ test(
           .end(should('list server one and two'))
 
         request
-          .get('/one/some/path?msg=hello')
-          .expect(200)
-          .expect('hello')
-          .end(should('proxy GET'))
-
-        request
-          .post('/one/some/path')
-          .send({ msg: 'hello' })
-          .expect(200)
-          .expect('hello')
-          .end(should('proxy POST'))
-
-        supertest('http://127.0.0.1:3000')
-          .get('/some/path?msg=hello')
-          .set('Host', 'one')
-          .expect(200)
-          .expect('hello')
-          .end(should('support vhost'))
-
-        supertest('http://127.0.0.1:3000')
           .get('/some/path?msg=hello')
           .set('Host', 'one.127.0.0.1.xip.io')
           .expect(200)
@@ -87,12 +67,14 @@ test(
               .end(should('not list server one'))
 
             request
-              .get('/one')
+              .get('/some/path?msg=hello')
+              .set('Host', 'one.127.0.0.1.xip.io')
               .expect(404)
               .end(should('not proxy'))
 
             request
-              .get('/two')
+              .get('/some/path?msg=hello')
+              .set('Host', 'two.127.0.0.1.xip.io')
               .expect(200)
               .end(should('still proxy'))
 
