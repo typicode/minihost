@@ -4,35 +4,28 @@
 
 When working with many dev servers, you have to increment and remember ports (e.g. [http://localhost:3000](), [http://localhost:4000](), ...).
 
-With minihost, you don't have to think about it. All your servers are in one place :)
+With minihost, you don't have to think about it.
 
 ## Usage
 
-Simply prefix your commands with `h`
+Prefix your commands with `h`
 
 ```bash
-~/front$   h gulp server
+~/front$ h gulp server
 ~/express$ h nodemon
 ```
 
-You can then access your servers on
+Your servers are now accessible at
 
 ```
-http://localhost:3000/front
-http://localhost:3000/express
+http://front.127.0.0.1.xip.io:3000
+http://express.127.0.0.1.xip.io:3000
 ```
 
-To list running servers, go to
+To list running servers, simply go to
 
 ```
 http://localhost:3000
-```
-
-To use a custom name, add `-n` option
-
-```bash
-~/express$ h -n api -- node index.js
-http://localhost:3000/api
 ```
 
 ## Install
@@ -41,15 +34,20 @@ http://localhost:3000/api
 npm install -g minihost
 ```
 
-## How it works
+## Supporting minihost
 
-minihost assumes that your web app binds itself to the PORT environment variable so it can properly proxy requests to your app.
+minihost expects your servers to bind themselves to the `PORT` environment variable so it can proxy requests.
 
-For example:
+Here are two ways to do it. 
 
 ```javascript
-var port = process.env.PORT || defaultPort;
-app.listen(port);
+// In your server code
+app.listen(process.env.PORT || 3000);
+```
+
+```bash
+# From the command line
+h 'sh -c some_server $PORT'
 ```
 
 ## License
