@@ -10,7 +10,13 @@
     $.get('_servers', function (servers) {
       var el = $('#servers')
       for (var name in servers) {
-        el.append('<li><a href="/' + name + '">' + name + ' (' + servers[name] + ')</a></li>')
+        el.append(
+          '<li>'
+        + '<a href="http://' + name + '.127.0.0.1.xip.io:3000">'
+        +   name + ' (' + servers[name] + ')'
+        + '</a>'
+        + '</li>'
+        )
       }
     })
   </script>
