@@ -33,7 +33,7 @@ test(
       }
     }
 
-    t.plan(9)
+    t.plan(10)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
@@ -69,6 +69,13 @@ test(
           .expect(200)
           .expect('hello')
           .end(should('support vhost'))
+
+        supertest('http://127.0.0.1:3000')
+          .get('/some/path?msg=hello')
+          .set('Host', 'one.127.0.0.1.xip.io')
+          .expect(200)
+          .expect('hello')
+          .end(should('support xip.io'))
 
         setTimeout(function () {
           one.kill()
