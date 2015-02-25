@@ -1,9 +1,11 @@
 var spawn = require('child_process').spawn
 var supertest = require('supertest')
+var WebSocketClient = require('websocket').client
 var test = require('tape')
 var pkg = require('../package.json')
 
 var request = supertest('http://127.0.0.1:3000')
+var webSocketClient = new WebSocketClient()
 
 function h (str, cb) {
   var args = [__dirname + '/../' + pkg.bin.h].concat(str.split(' '))
@@ -33,7 +35,7 @@ test(
       }
     }
 
-    t.plan(7)
+    t.plan(8)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
@@ -56,6 +58,13 @@ test(
           .expect(200)
           .expect('hello')
           .end(should('support xip.io'))
+
+        webSocketClient
+          .on('connect', function (socket) {
+            t.pass('Daemon should support WebSocket')
+            socket.close()
+          })
+          .connect('ws://one.127.0.0.1.xip.io:3000', 'echo-protocol')
 
         setTimeout(function () {
           one.kill()

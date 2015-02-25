@@ -1,11 +1,12 @@
-var express = require('express')
+var app = require('express')()
+var server = require('http').createServer(app)
 var bodyParser = require('body-parser')
-var app = express()
+var WebSocketServer = require('websocket').server
 
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-  res.end()
+  res.end('OK')
 })
 
 app.get('/some/path', function (req, res) {
@@ -18,6 +19,13 @@ app.post('/some/path', function (req, res) {
   res.send(req.body.msg)
 })
 
-app.listen(process.env.PORT, function () {
+wsServer = new WebSocketServer({ httpServer: server })
+
+wsServer.on('request', function (request) {
+  console.log('Test WebSocket')
+  request.accept('echo-protocol', request.origin)
+})
+
+server.listen(process.env.PORT, function () {
   console.log('Test server listening on ' +  process.env.PORT)
 })
