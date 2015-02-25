@@ -38,7 +38,7 @@ npm install -g minihost
 
 minihost expects your servers to bind themselves to the `PORT` environment variable so it can proxy requests.
 
-Here are two ways to do it. 
+Here are two ways to do it.
 
 ```javascript
 // In your server code
@@ -48,6 +48,14 @@ app.listen(process.env.PORT || 3000);
 ```bash
 # From the command line
 h 'sh -c some_server $PORT'
+```
+
+## Configure
+
+By default, minihost listens on port 3000. To change this, run
+
+```
+npm config set minihost:port 8080
 ```
 
 ## License
