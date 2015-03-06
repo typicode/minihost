@@ -21,4 +21,4 @@ var argv = yargs
   .argv
 
 updateNotifier({pkg: pkg}).notify()
-h.run(argv)
+h(argv)
