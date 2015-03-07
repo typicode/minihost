@@ -2,21 +2,25 @@
 <html>
 <head>
   <title>minihost</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+  <h1>minihost</h1>
   <ul id="servers"></ul>
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script>
+    var port = location.port
+    var el = $('#servers')
     $.get('_servers', function (servers) {
-      var el = $('#servers')
       for (var name in servers) {
-        el.append(
+        var item =
           '<li>'
-        + '<a href="http://' + name + '.127.0.0.1.xip.io:3000">'
-        +   name + ' (' + servers[name] + ')'
+        + '<a href="http://' + name + '.127.0.0.1.xip.io:' + port + '">'
+        +   'http://' + name + '.127.0.0.1.xip.io:' + port
         + '</a>'
         + '</li>'
-        )
+        el.append(item)
       }
     })
   </script>

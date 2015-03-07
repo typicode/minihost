@@ -1,0 +1,24 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #454545;
+  font-weight: 300;
+  border-bottom: 1px solid #E2E2E2;
+  margin: 0;
+  padding: 20px;
+  letter-spacing: 0.08em;
+}
+
+ul {
+  margin: 0;
+  padding: 10px;
+}
+
+li {
+  list-style: none;
+  padding: 10px;
+}

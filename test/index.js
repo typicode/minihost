@@ -35,7 +35,7 @@ test(
       }
     }
 
-    t.plan(8)
+    t.plan(9)
 
     h('node index.js', function (one) {
       h('-n two -- node index.js', function (two) {
@@ -51,6 +51,13 @@ test(
           .expect(/one/)
           .expect(/two/)
           .end(should('list server one and two'))
+
+        request
+          .get('/')
+          .set('Host', 'one.127.0.0.1.xip.io')
+          .expect(200)
+          .expect('OK')
+          .end(should('support xip.io'))
 
         request
           .get('/some/path?msg=hello')
