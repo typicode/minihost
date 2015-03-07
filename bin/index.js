@@ -3,9 +3,15 @@ var updateNotifier = require('update-notifier')
 var yargs = require('yargs')
 var h = require('../lib/h')
 var pkg = require('../package.json')
+var argv
 
-var argv = yargs
-  .usage('$0 [opts --] <command>')
+updateNotifier({pkg: pkg}).notify()
+process.argv.splice(0, 2)
+
+argv = process.argv
+argv = argv[0] && argv[0].indexOf('-') === 0 ? argv : argv.concat(argv)
+argv = yargs(argv)
+  .usage('$0 [opts] -- <command>')
   .help('help').alias('help', 'h')
   .version(pkg.version, 'version').alias('version', 'v')
   .options({
@@ -20,5 +26,4 @@ var argv = yargs
   .demand(1)
   .argv
 
-updateNotifier({pkg: pkg}).notify()
-h(argv)
+h(argv._, argv)
