@@ -5,7 +5,7 @@ var h = require('../lib/h')
 var pkg = require('../package.json')
 
 var argv = yargs
-  .usage('$0 <command>')
+  .usage('$0 [opts --] <command>')
   .help('help').alias('help', 'h')
   .version(pkg.version, 'version').alias('version', 'v')
   .options({
