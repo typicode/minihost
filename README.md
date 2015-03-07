@@ -45,7 +45,7 @@ app.listen(process.env.PORT || 3000);
 ```
 
 ```bash
-h -- sh -c 'some_server $PORT'
+h sh -c 'some_server $PORT'
 ```
 
 ## Configure
