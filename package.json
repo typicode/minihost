@@ -1,6 +1,6 @@
 {
   "name": "minihost",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "dev utility",
   "main": "lib/h.js",
   "bin": {
