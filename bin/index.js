@@ -26,6 +26,6 @@ argv = yargs(argv)
   .demand(1)
   .argv
 
-h(argv._, argv, function (err) {
+h(argv, function (err) {
   if (err) throw err
 })
