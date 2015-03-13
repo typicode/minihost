@@ -46,7 +46,7 @@ test(
           .end(should('have homepage'))
 
         request
-          .get('/_servers')
+          .get('/_targets')
           .expect(200)
           .expect(/one/)
           .expect(/two/)
@@ -77,7 +77,7 @@ test(
           one.kill()
           one.on('exit', function () {
             request
-              .get('/_servers')
+              .get('/_targets')
               .expect(200)
               .expect(/^((?!one).)*$/)
               .end(should('not list server one'))
