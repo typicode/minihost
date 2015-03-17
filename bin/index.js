@@ -22,7 +22,7 @@ argv = yargs(argv)
   })
   .example('~/express$ $0 nodemon', 'http://express.127.0.0.1.xip.io:3000')
   .example('~/front$ $0 gulp server', 'http://front.127.0.0.1.xip.io:3000')
-  .example('~/other$ $0 -n app -- nodemon', 'http://other.127.0.0.1.xip.io:3000')
+  .example('~/other$ $0 -n app -- nodemon', 'http://app.127.0.0.1.xip.io:3000')
   .demand(1)
   .argv
 
