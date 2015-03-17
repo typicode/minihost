@@ -11,8 +11,8 @@ With minihost, you don't have to think about it.
 Prefix your commands with `h`
 
 ```bash
-~/front$ h gulp server
-~/express$ h nodemon
+~/front$ h -- gulp server
+~/express$ h -- nodemon
 ```
 
 Your servers are now accessible at
