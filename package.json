@@ -30,10 +30,10 @@
     "get-port": "^1.0.0",
     "http-proxy": "^1.8.1",
     "morgan": "^1.5.1",
-    "npmconf": "^2.1.1",
     "request": "^2.53.0",
     "serve-static": "^1.9.1",
     "update-notifier": "^0.3.0",
+    "user-home": "^1.1.1",
     "yargs": "^3.0.4"
   },
   "devDependencies": {

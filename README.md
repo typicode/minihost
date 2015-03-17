@@ -18,14 +18,14 @@ Prefix your commands with `h`
 Your servers are now accessible at
 
 ```
-http://front.127.0.0.1.xip.io:3000
-http://express.127.0.0.1.xip.io:3000
+http://front.127.0.0.1.xip.io:2000
+http://express.127.0.0.1.xip.io:2000
 ```
 
 To list running servers, simply go to
 
 ```
-http://localhost:3000
+http://localhost:2000
 ```
 
 ## Install
@@ -50,10 +50,10 @@ h sh -c 'some_server $PORT'
 
 ## Configure
 
-By default, minihost listens on port 3000. To change this, run
+By default, minihost listens on port 2000. To change this, run
 
 ```
-npm config set minihost:port 8080
+echo 8000 > ~/.minihost
 ```
 
 ## License

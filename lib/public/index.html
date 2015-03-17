@@ -2,27 +2,38 @@
 <html>
 <head>
   <title>minihost</title>
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>minihost</h1>
-  <ul id="servers"></ul>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <a class="navbar-brand" href="https://github.com/typicode/minihost">minihost</a>
+    </div>
+  </nav>
+  <div class="container">
+    <div id="targets"></div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script>
-    var port = location.port
-    var el = $('#servers')
-    $.get('_servers', function (servers) {
-      for (var name in servers) {
-        var item =
-          '<li>'
-        + '<a href="http://' + name + '.127.0.0.1.xip.io:' + port + '">'
-        +   'http://' + name + '.127.0.0.1.xip.io:' + port
-        + '</a>'
-        + '</li>'
-        el.append(item)
-      }
-    })
+    function render () {
+      var port = location.port
+      $.get('_targets', function (targets) {
+        var el = $('#targets')
+        var html = ''
+        for (var name in targets) {
+          html +=
+            '<p>'
+          + '  <a href="http://' + name + '.127.0.0.1.xip.io:' + port + '">'
+          + '    http://' + name + '.127.0.0.1.xip.io:' + port
+          + '  </a>'
+          + '</p>'
+        }
+        el.html(html)
+      })
+    }
+
+    render()
   </script>
 </body>
 </html>

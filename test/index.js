@@ -4,7 +4,7 @@ var WebSocketClient = require('websocket').client
 var test = require('tape')
 var pkg = require('../package.json')
 
-var request = supertest('http://127.0.0.1:3000')
+var request = supertest('http://127.0.0.1:2000')
 var webSocketClient = new WebSocketClient()
 
 function h (str, cb) {
@@ -71,7 +71,7 @@ test(
             t.pass('Daemon should support WebSocket')
             socket.close()
           })
-          .connect('ws://one.127.0.0.1.xip.io:3000', 'echo-protocol')
+          .connect('ws://one.127.0.0.1.xip.io:2000', 'echo-protocol')
 
         setTimeout(function () {
           one.kill()
