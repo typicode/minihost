@@ -52,7 +52,7 @@ h sh -c 'some_server $PORT'
 
 By default, minihost listens on port 2000. To change this, run
 
-```
+```bash
 echo 8000 > ~/.minihost
 ```
 
