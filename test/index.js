@@ -7,7 +7,7 @@ var pkg = require('../package.json')
 var request = supertest('http://127.0.0.1:2000')
 var webSocketClient = new WebSocketClient()
 
-function h (str, cb) {
+function h (str) {
   var args = [__dirname + '/../' + pkg.bin.h].concat(str.split(' '))
   var opts = {
     cwd: __dirname + '/one',
@@ -20,9 +20,7 @@ function h (str, cb) {
     throw err
   })
 
-  setTimeout(function () {
-    cb(proc)
-  }, 1000)
+  return proc
 }
 
 test(
@@ -37,77 +35,79 @@ test(
 
     t.plan(9)
 
-    h('node index.js', function (one) {
-      h('-n two -- node index.js', function (two) {
-        request
-          .get('/')
-          .expect(200)
-          .expect(/minihost/)
-          .end(should('have homepage'))
+    var one = h('-- node index.js')
+    var two = h('-n two -- node index.js')
 
-        request
-          .get('/_targets')
-          .expect(200)
-          .expect(/one/)
-          .expect(/two/)
-          .end(should('list server one and two'))
+    setTimeout(function () {
+      request
+        .get('/')
+        .expect(200)
+        .expect(/minihost/)
+        .end(should('have homepage'))
 
-        request
-          .get('/')
-          .set('Host', 'one.127.0.0.1.xip.io')
-          .expect(200)
-          .expect('OK')
-          .end(should('support xip.io'))
+      request
+        .get('/_targets')
+        .expect(200)
+        .expect(/one/)
+        .expect(/two/)
+        .end(should('list server one and two'))
 
-        request
-          .get('/some/path?msg=hello')
-          .set('Host', 'one.127.0.0.1.xip.io')
-          .expect(200)
-          .expect('hello')
-          .end(should('support xip.io'))
+      request
+        .get('/')
+        .set('Host', 'one.127.0.0.1.xip.io')
+        .expect(200)
+        .expect('OK')
+        .end(should('support xip.io'))
 
-        webSocketClient
-          .on('connect', function (socket) {
-            t.pass('Daemon should support WebSocket')
-            socket.close()
-          })
-          .connect('ws://one.127.0.0.1.xip.io:2000', 'echo-protocol')
+      request
+        .get('/some/path?msg=hello')
+        .set('Host', 'one.127.0.0.1.xip.io')
+        .expect(200)
+        .expect('hello')
+        .end(should('support xip.io'))
 
-        setTimeout(function () {
-          one.kill()
-          one.on('exit', function () {
-            request
-              .get('/_targets')
-              .expect(200)
-              .expect(/^((?!one).)*$/)
-              .end(should('not list server one'))
+      webSocketClient
+        .on('connect', function (socket) {
+          t.pass('Daemon should support WebSocket')
+          socket.close()
+        })
+        .connect('ws://one.127.0.0.1.xip.io:2000', 'echo-protocol')
 
-            request
-              .get('/some/path?msg=hello')
-              .set('Host', 'one.127.0.0.1.xip.io')
-              .expect(404)
-              .end(should('not proxy'))
+      setTimeout(function () {
+        one.kill()
+        one.on('exit', function () {
+          request
+            .get('/_targets')
+            .expect(200)
+            .expect(/^((?!one).)*$/)
+            .end(should('not list server one'))
 
-            request
-              .get('/some/path?msg=hello')
-              .set('Host', 'two.127.0.0.1.xip.io')
-              .expect(200)
-              .end(should('still proxy'))
+          request
+            .get('/some/path?msg=hello')
+            .set('Host', 'one.127.0.0.1.xip.io')
+            .expect(404)
+            .end(should('not proxy'))
 
-            setTimeout(function () {
-              two.kill()
-              two.on('exit', function () {
-                request
-                  .get('/')
-                  .end(function (err) {
-                    var msg = 'Daemon should be stopped when no more servers ' +
-                              'are running'
-                    t.notEqual(err, null, msg)
-                  })
-              })
-            }, 400)
-          })
-        }, 400)
-    })
-  })
-})
+          request
+            .get('/some/path?msg=hello')
+            .set('Host', 'two.127.0.0.1.xip.io')
+            .expect(200)
+            .end(should('still proxy'))
+
+          setTimeout(function () {
+            two.kill()
+            two.on('exit', function () {
+              request
+                .get('/')
+                .end(function (err) {
+                  var msg = 'Daemon should be stopped when no more servers ' +
+                            'are running'
+                  t.notEqual(err, null, msg)
+                })
+            })
+          }, 400)
+        })
+      }, 400)
+    }, 1000)
+  }
+)
