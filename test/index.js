@@ -23,91 +23,100 @@ function h (str) {
   return proc
 }
 
-test(
-  '\n~/test/one$ h node index.js' +
-  '\n~/test/one$ h -n two -- node index.js',
-  function (t) {
-    function should (msg) {
-      return function (err) {
-        t.error(err, 'Daemon should ' + msg)
-      }
-    }
+describe('h', function () {
 
-    t.plan(9)
+  var timeout = 1000
 
-    var one = h('-- node index.js')
-    var two = h('-n two -- node index.js')
+  before(function (done) {
+    h('--stop')
+    setTimeout(done, timeout)
+  })
 
-    setTimeout(function () {
+  describe('-- node index.js', function () {
+
+    var child
+
+    before(function (done) {
+      child = h('-- node index.js')
+      setTimeout(done, timeout)
+    })
+
+    it('should start minihost', function (done) {
       request
         .get('/')
-        .expect(200)
         .expect(/minihost/)
-        .end(should('have homepage'))
+        .end(done)
+    })
 
+    it('should add self to targets', function (done) {
       request
         .get('/_targets')
-        .expect(200)
         .expect(/one/)
-        .expect(/two/)
-        .end(should('list server one and two'))
+        .end(done)
+    })
 
+    it('should be possible to make simple HTTP requests', function (done) {
       request
         .get('/')
         .set('Host', 'one.127.0.0.1.xip.io')
-        .expect(200)
         .expect('OK')
-        .end(should('support xip.io'))
+        .end(done)
+    })
 
+    it('should be possible to make complex HTTP requests', function (done) {
       request
         .get('/some/path?msg=hello')
         .set('Host', 'one.127.0.0.1.xip.io')
-        .expect(200)
         .expect('hello')
-        .end(should('support xip.io'))
+        .end(done)
+    })
 
+    it('should be possible to make WebSocket requests', function (done) {
       webSocketClient
         .on('connect', function (socket) {
-          t.pass('Daemon should support WebSocket')
+          done()
           socket.close()
         })
         .connect('ws://one.127.0.0.1.xip.io:2000', 'echo-protocol')
+    })
 
-      setTimeout(function () {
-        one.kill()
-        one.on('exit', function () {
-          request
-            .get('/_targets')
-            .expect(200)
-            .expect(/^((?!one).)*$/)
-            .end(should('not list server one'))
+    it('should remove self from targets on kill', function (done) {
+      child.on('exit', function () {
+        request
+          .get('/_targets')
+          .expect(/^((?!one).)*$/)
+          .end(done)
+      }).kill()
+    })
+  })
 
-          request
-            .get('/some/path?msg=hello')
-            .set('Host', 'one.127.0.0.1.xip.io')
-            .expect(404)
-            .end(should('not proxy'))
+  describe('--name', function () {
+    before(function (done) {
+      h('--name two -- node index.js')
+      setTimeout(done, timeout)
+    })
 
-          request
-            .get('/some/path?msg=hello')
-            .set('Host', 'two.127.0.0.1.xip.io')
-            .expect(200)
-            .end(should('still proxy'))
+    it('should make the server available under another name', function (done) {
+      request
+        .get('/')
+        .set('Host', 'two.127.0.0.1.xip.io')
+        .expect('OK')
+        .end(done)
+    })
+  })
 
-          setTimeout(function () {
-            two.kill()
-            two.on('exit', function () {
-              request
-                .get('/')
-                .end(function (err) {
-                  var msg = 'Daemon should be stopped when no more servers ' +
-                            'are running'
-                  t.notEqual(err, null, msg)
-                })
-            })
-          }, 400)
+  describe('--stop', function () {
+    before(function (done) {
+      h('--stop')
+      setTimeout(done, timeout)
+    })
+
+    it('should stop minihost', function (done) {
+      request
+        .get('/')
+        .end(function (err) {
+          if (err) done()
         })
-      }, 400)
-    }, 1000)
-  }
-)
+    })
+  })
+})
