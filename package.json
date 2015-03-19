@@ -8,7 +8,8 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "test": "node test | tap-spec"
+    "test": "mocha",
+    "uninstall": "bin/uninstall.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "yargs": "^3.0.4"
   },
   "devDependencies": {
+    "mocha": "^2.2.1",
     "supertest": "^0.15.0",
     "tap-spec": "^2.2.1",
     "tape": "^3.5.0",
