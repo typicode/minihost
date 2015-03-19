@@ -8,14 +8,14 @@ With minihost, you don't have to think about it.
 
 ## Usage
 
-Prefix your commands with `h`
+Let's say you want to start two servers, prefix your commands with `h`
 
 ```bash
 ~/front$ h -- gulp server
 ~/express$ h -- nodemon
 ```
 
-Your servers are now accessible at
+minihost will start them on free ports and make them accessible on virtual hosts
 
 ```
 http://front.127.0.0.1.xip.io:2000
@@ -48,9 +48,21 @@ app.listen(process.env.PORT || 3000);
 h -- sh -c 'some_server $PORT'
 ```
 
-## Configure
+## Extras
 
-By default, minihost listens on port 2000. To change this, run
+To set a custom name
+
+```bash
+h --name app -- nodemon
+```
+
+To stop minihost
+
+```bash
+h --stop
+```
+
+To change the port minihost listens to (default: 2000)
 
 ```bash
 echo 8000 > ~/.minihost
