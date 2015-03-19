@@ -25,7 +25,7 @@ function h (str) {
 
 describe('h', function () {
 
-  var timeout = 1000
+  var timeout = process.env.TRAVIS ? 1000 : 2000
 
   before(function (done) {
     h('--stop')
