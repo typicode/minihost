@@ -68,7 +68,7 @@ To change the port minihost listens to (default: 2000)
 
 ```bash
 echo 8000 > ~/.minihost
-h --stop # in case minihost is already running
+h --stop # In case minihost is already running
 ```
 
 ## License
