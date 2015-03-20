@@ -38,13 +38,13 @@ npm install -g minihost
 
 Your servers need to listen on the `PORT` environment variable so minihost can proxy requests.
 
-You can do so from your server code
+You can do so from your server code.
 
 ```javascript
 app.listen(process.env.PORT || 3000);
 ```
 
-Or from the command line (`PORT` will be dynamically replaced)
+Or from the command line (`PORT` will be dynamically replaced).
 
 ```bash
 h -- some_server -p PORT
