@@ -21,9 +21,10 @@ var yargs = yargs
       describe: 'Stop minihost'
     }
   })
-  .example('~/express$ $0 nodemon', 'http://express.127.0.0.1.xip.io:2000')
-  .example('~/front$ $0 gulp server', 'http://front.127.0.0.1.xip.io:2000')
-  .example('~/other$ $0 -n app -- nodemon', 'http://app.127.0.0.1.xip.io:2000')
+  .example('~/express$ $0 -- nodemon', 'http://express.127.0.0.1.xip.io:2000')
+  .example('~/express$ $0 -n app -- nodemon', 'http://app.127.0.0.1.xip.io:2000')
+  .example(' ~/static$ $0 -- serve -p PORT', 'http://static.127.0.0.1.xip.io:2000')
+  .example('  ~/front$ $0 -- gulp server', 'http://front.127.0.0.1.xip.io:2000')
   .epilog('To list running servers, go to http://localhost:2000')
 
 var argv = yargs.argv
