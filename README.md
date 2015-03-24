@@ -28,13 +28,14 @@ To list running servers, simply go to
 http://localhost:2000
 ```
 
+Note: On windows, you may need to append `.cmd` to your commands (for example `h -- nodemon.cmd`).
+
 ## Install
 
 ```
 npm install -g minihost
 ```
 
-Note: On windows, you may need to append `.cmd` to your commands (for example `h -- nodemon.cmd`).
 
 ## Supporting minihost
 
