@@ -44,10 +44,10 @@ You can do so from your server code.
 app.listen(process.env.PORT || 3000);
 ```
 
-Or from the command line (`PORT` will be dynamically replaced).
+Or from the command line. `[PORT]` will be dynamically replaced.
 
 ```bash
-h -- some_server -p PORT
+h -- some_server -p [PORT]
 ```
 
 ## Extras

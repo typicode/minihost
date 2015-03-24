@@ -106,13 +106,13 @@ describe('h', function () {
     })
   })
 
-  describe('-- cmd PORT', function () {
+  describe('-- cmd [PORT]', function () {
     before(function (done) {
-      h('--name three -- node index-argv.js PORT')
+      h('--name three -- node index-argv.js [PORT]')
       setTimeout(done, timeout)
     })
 
-    it('should dynamically replace PORT', function (done) {
+    it('should dynamically replace [PORT]', function (done) {
       request
         .get('/')
         .set('Host', 'three.127.0.0.1.xip.io')
