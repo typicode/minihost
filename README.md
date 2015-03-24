@@ -34,6 +34,8 @@ http://localhost:2000
 npm install -g minihost
 ```
 
+Note: On windows, you may need to append `.cmd` to your commands (for example `h -- nodemon.cmd`).
+
 ## Supporting minihost
 
 Your servers need to listen on the `PORT` environment variable so minihost can proxy requests.
