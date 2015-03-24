@@ -9,7 +9,7 @@
   "preferGlobal": true,
   "scripts": {
     "test": "mocha",
-    "uninstall": "bin/uninstall.js"
+    "uninstall": "node bin/uninstall.js"
   },
   "repository": {
     "type": "git",
