@@ -7,6 +7,7 @@ var pkg = require('../package.json')
 updateNotifier({pkg: pkg}).notify()
 
 var yargs = yargs
+  .strict()
   .usage('$0 [opts] -- <command>')
   .help('help').alias('help', 'h')
   .version(pkg.version, 'version').alias('version', 'v')
@@ -23,7 +24,7 @@ var yargs = yargs
   })
   .example('~/express$ $0 -- nodemon', 'http://express.127.0.0.1.xip.io:2000')
   .example('~/express$ $0 -n app -- nodemon', 'http://app.127.0.0.1.xip.io:2000')
-  .example(' ~/static$ $0 -- serve -p PORT', 'http://static.127.0.0.1.xip.io:2000')
+  .example(' ~/static$ $0 -- serve -p [PORT]', 'http://static.127.0.0.1.xip.io:2000')
   .example('  ~/front$ $0 -- gulp server', 'http://front.127.0.0.1.xip.io:2000')
   .epilog('To list running servers, go to http://localhost:2000')
 
