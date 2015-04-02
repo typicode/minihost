@@ -1,11 +1,12 @@
 var spawn = require('child_process').spawn
 var supertest = require('supertest')
 var WebSocketClient = require('websocket').client
-var test = require('tape')
 var pkg = require('../package.json')
 
 var request = supertest('http://127.0.0.1:2000')
 var webSocketClient = new WebSocketClient()
+
+var procs = []
 
 function h (str) {
   var args = [__dirname + '/../' + pkg.bin.h].concat(str.split(' '))
@@ -20,7 +21,7 @@ function h (str) {
     throw err
   })
 
-  return proc
+  procs.push(proc)
 }
 
 describe('h', function () {
@@ -29,16 +30,20 @@ describe('h', function () {
   this.timeout(timeout + 1000)
 
   before(function (done) {
-    h('--stop')
-    setTimeout(done, timeout)
+    request
+      .get('/_pid')
+      .end(function (err, res) {
+        if (err) return done()
+        console.log('Killing running proxy')
+        process.kill(res.text)
+        setTimeout(done, timeout)
+      })
   })
 
   describe('-- node index.js', function () {
 
-    var child
-
     before(function (done) {
-      child = h('-- node index.js')
+      h('-- node index.js')
       setTimeout(done, timeout)
     })
 
@@ -80,15 +85,6 @@ describe('h', function () {
         })
         .connect('ws://one.127.0.0.1.xip.io:2000', 'echo-protocol')
     })
-
-    it('should remove self from targets on kill', function (done) {
-      child.on('exit', function () {
-        request
-          .get('/_targets')
-          .expect(/^((?!one).)*$/)
-          .end(done)
-      }).kill()
-    })
   })
 
   describe('--name', function () {
@@ -121,17 +117,29 @@ describe('h', function () {
     })
   })
 
-  describe('--stop', function () {
+  describe('when a process is killed', function () {
+    it('should not be listed anymore', function (done) {
+      procs[0].on('exit', function () {
+        request
+          .get('/_targets')
+          .expect(/^((?!one).)*$/)
+          .end(done)
+      }).kill()
+    })
+  })
+
+  describe('when all processes are killed', function () {
     before(function (done) {
-      h('--stop')
+      procs[1].kill()
+      procs[2].kill()
       setTimeout(done, timeout)
     })
 
-    it('should stop minihost', function (done) {
+    it('should not be possible to access proxy', function(done) {
       request
         .get('/')
         .end(function (err) {
-          if (err) done()
+          err ? done() : done(new Error('Proxy should not be running'))
         })
     })
   })

@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+strong {
+  color: #334;
+  font-size: 16px;
+}
+
+strong a:hover {
+  text-decoration: underline;
+}
+
+small {
+  color: #778;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+

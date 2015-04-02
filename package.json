@@ -27,6 +27,7 @@
   "homepage": "https://github.com/typicode/minihost",
   "dependencies": {
     "body-parser": "^1.12.0",
+    "chalk": "^1.0.0",
     "cross-spawn": "^0.2.8",
     "express": "^4.11.2",
     "get-port": "^1.0.0",
@@ -41,8 +42,6 @@
   "devDependencies": {
     "mocha": "^2.2.1",
     "supertest": "^0.15.0",
-    "tap-spec": "^2.2.1",
-    "tape": "^3.5.0",
     "websocket": "^1.0.17"
   }
 }

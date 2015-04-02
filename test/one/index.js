@@ -22,7 +22,7 @@ app.post('/some/path', function (req, res) {
 wsServer = new WebSocketServer({ httpServer: server })
 
 wsServer.on('request', function (request) {
-  console.log('Test WebSocket')
+  console.log('Test server WebSocket request')
   request.accept('echo-protocol', request.origin)
 })
 

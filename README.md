@@ -4,22 +4,28 @@
 
 When working with many dev servers, you have to increment and remember ports (e.g. [http://localhost:3000](), [http://localhost:4000](), ...).
 
-With minihost, you don't have to think about it.
+With minihost, you don't have to think about that.
+
+## Install
+
+```
+npm install -g minihost
+```
 
 ## Usage
 
 Let's say you want to start two servers, prefix your commands with `h`
 
 ```bash
-~/front$ h -- gulp server
-~/express$ h -- nodemon
+~/one$ h -- nodemon
+~/two$ h -- npm start
 ```
 
 minihost will start them on free ports and make them accessible on virtual hosts
 
 ```
-http://front.127.0.0.1.xip.io:2000
-http://express.127.0.0.1.xip.io:2000
+http://one.127.0.0.1.xip.io:2000
+http://two.127.0.0.1.xip.io:2000
 ```
 
 To list running servers, simply go to
@@ -28,47 +34,33 @@ To list running servers, simply go to
 http://localhost:2000
 ```
 
-## Install
-
-```
-npm install -g minihost
-```
-
 ## Supporting minihost
 
-Your servers need to listen on the `PORT` environment variable so minihost can proxy requests.
-
-You can do so from your server code.
+For minihost to work, you need to have your server listening on the PORT environment variable. For example:
 
 ```javascript
-app.listen(process.env.PORT || 3000);
+var port = process.env.PORT || 3000
+app.listen(port);
 ```
 
-Or from the command line. `[PORT]` will be dynamically replaced.
+As a convenience, you can also use `[PORT]` to pass it from the command-line interface.
 
 ```bash
-h -- some_server -p [PORT]
+h -- cmd -p [PORT]
 ```
 
-## Extras
+## Options
 
 To set a custom name
 
 ```bash
-h --name app -- nodemon
+h -n app -- nodemon
 ```
 
-To stop minihost
-
-```bash
-h --stop
-```
-
-To change the port minihost listens to (default: 2000)
+To change the port minihost listens to
 
 ```bash
 echo 8000 > ~/.minihost
-h --stop # In case minihost is already running
 ```
 
 ## License
