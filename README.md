@@ -46,7 +46,7 @@ app.listen(3000)
 app.listen(process.env.PORT || 3000);
 ```
 
-As a convenience, you can also use `[PORT]` to pass it from the command-line interface.
+As a convenience, you can also use `[PORT]` in the command-line interface.
 
 ```bash
 h -- cmd -p [PORT]
