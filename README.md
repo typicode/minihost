@@ -39,8 +39,11 @@ http://localhost:2000
 For minihost to work, you need to have your server listening on the PORT environment variable. For example:
 
 ```javascript
-var port = process.env.PORT || 3000
-app.listen(port);
+# KO
+app.listen(3000)
+
+# OK
+app.listen(process.env.PORT || 3000);
 ```
 
 As a convenience, you can also use `[PORT]` to pass it from the command-line interface.
