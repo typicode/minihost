@@ -31,11 +31,10 @@ describe('h', function () {
 
   before(function (done) {
     request
-      .get('/_pid')
+      .post('/_stop')
       .end(function (err, res) {
         if (err) return done()
-        console.log('Killing running proxy')
-        process.kill(res.text)
+        console.log('Killed running proxy')
         setTimeout(done, timeout)
       })
   })
@@ -144,3 +143,4 @@ describe('h', function () {
     })
   })
 })
+
