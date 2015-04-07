@@ -26,3 +26,20 @@ a {
   color: inherit;
 }
 
+/* Sticky footer */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 28px; /* bottom = footer height */
+}
+
+footer {
+    position: absolute;
+    left: 28px;
+    bottom: 0;
+    height: 40px;
+    width: 360px;
+}
