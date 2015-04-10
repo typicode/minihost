@@ -32,7 +32,7 @@ Prefix your commands with `h`:
 ~/two$ h -- npm start
 ```
 
-Your servers are accessible locally on `http://<name>*:2000`:
+Your servers are accessible locally on `http://<name>*:2000` using any host that resolves to `127.0.0.1`, for example:
 
 ```bash
 # Using readme.localtest.me
