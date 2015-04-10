@@ -8,7 +8,6 @@ var pkg = require('../package.json')
 
 updateNotifier({pkg: pkg}).notify()
 
-var port = conf.getPort()
 var argv = yargs
   .strict()
   .usage('$0 [opts] -- <command>')
@@ -20,11 +19,11 @@ var argv = yargs
       describe: 'Set server name'
     }
   })
-  .example('~/app$ $0 -- nodemon', 'http://app.127.0.0.1.xip.io:' + port)
-  .example('~/app$ $0 -- serve -p [PORT]', 'http://app.127.0.0.1.xip.io:' + port)
-  .example('~/app$ $0 -n project -- nodemon', 'http://project.127.0.0.1.xip.io:' + port)
-  .epilog('To list running servers, go to http://localhost:' + port)
+  .example('~/app$ $0 -- nodemon', 'http://app' + conf.suffix)
+  .example('~/app$ $0 -- serve -p [PORT]', 'http://app' + conf.suffix)
+  .example('~/app$ $0 -n project -- nodemon', 'http://project' + conf.suffix)
+  .epilog('To list running servers, go to http://localhost:' + conf.port)
   .demand(1)
   .argv
 
-h.run(argv)
+h(argv)

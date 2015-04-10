@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title minihost
+    link(rel='stylesheet', type='text/css', href='style.css')
+  body
+    each target in targets
+      p
+        strong: a(href=target.url)=target.name
+        br
+        small: a(href='http://localhost:#{target.port}') localhost:#{target.port}
+    footer: small: a(href='https://github.com/typicode/minihost') minihost v#{version}
+

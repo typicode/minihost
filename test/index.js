@@ -26,7 +26,7 @@ function h (str) {
 
 describe('h', function () {
 
-  var timeout = process.env.TRAVIS ? 4000 : 2000
+  var timeout = process.env.TRAVIS ? 4000 : 1000
   this.timeout(timeout + 1000)
 
   before(function (done) {
@@ -55,7 +55,7 @@ describe('h', function () {
 
     it('should add self to targets', function (done) {
       request
-        .get('/_targets')
+        .get('/')
         .expect(/one/)
         .end(done)
     })
@@ -101,13 +101,13 @@ describe('h', function () {
     })
   })
 
-  describe('-- cmd [PORT]', function () {
+  describe('-- \'cmd $PORT\'', function () {
     before(function (done) {
-      h('--name three -- node index-argv.js [PORT]')
+      h('--name three -- \'node index-argv.js $PORT\'')
       setTimeout(done, timeout)
     })
 
-    it('should dynamically replace [PORT]', function (done) {
+    it('should replace $PORT', function (done) {
       request
         .get('/')
         .set('Host', 'three.127.0.0.1.xip.io')
@@ -120,7 +120,7 @@ describe('h', function () {
     it('should not be listed anymore', function (done) {
       procs[0].on('exit', function () {
         request
-          .get('/_targets')
+          .get('/')
           .expect(/^((?!one).)*$/)
           .end(done)
       }).kill()

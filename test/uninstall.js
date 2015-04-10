@@ -12,7 +12,7 @@ describe('uninstall.js', function () {
     var proxyFilename = path.join(__dirname, '..', 'lib/proxy')
     var uninstallFilename = path.join(__dirname, '..', 'bin/uninstall')
 
-    fs.writeFileSync(conf.getFilename(), '2000')
+    fs.writeFileSync(conf.portFile, '2000')
     spawn('node', [proxyFilename], opts)
 
     setTimeout(function () {
@@ -22,7 +22,7 @@ describe('uninstall.js', function () {
   })
 
   it('should remove conf file', function () {
-    assert(!fs.existsSync(conf.getFilename()))
+    assert(!fs.existsSync(conf.portFile))
   })
 
   it('should stop proxy', function (done) {
