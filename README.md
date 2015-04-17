@@ -4,18 +4,7 @@ When working with many dev servers, you have to increment and remember ports (e.
 
 With minihost, you don't have to think about that.
 
-## Example
-
-```bash
-~/app$ h -- nodemon
-~/app$ curl http://app.127.0.0.1.xip.io:2000
-```
-
-## Features
-
-* Small (~300 loc)
-* Supports OS X, Linux, Windows
-* Compatible with any domain that resolves to 127.0.0.1
+Windows, Linux and OS X supported.
 
 ## Usage
 
@@ -87,7 +76,8 @@ app.listen(process.env.PORT || 3000);
 Or from the command-line:
 
 ```bash
-h -- 'cmd -p $PORT'
+h -- 'cmd -p $PORT'  # Linux, OS X
+h -- "cmd -p %PORT%" # Windows
 ```
 
 ## License
