@@ -4,7 +4,7 @@ When working with many dev servers, you have to increment and remember ports (e.
 
 With minihost, you don't have to think about that.
 
-Windows, Linux and OS X supported.
+Works on Windows, Linux and OS X.
 
 ## Usage
 
