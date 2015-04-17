@@ -32,7 +32,9 @@ Prefix your commands with `h`:
 ~/two$ h -- npm start
 ```
 
-Your servers are accessible locally on `http://<name>*:2000` using any host that resolves to `127.0.0.1`, for example:
+You can then view your running servers on `http://localhost:2000` and access them locally on `http://<name>*:2000` using any host that resolves to `127.0.0.1`.
+
+For example:
 
 ```bash
 # Using dnsmasq and a local .dev domain
@@ -44,7 +46,7 @@ http://one:2000
 http://two:2000
 ```
 
-You can also use public wildcard domain names that resolves to `127.0.0.1`:
+Public wildcard domain names that resolves to `127.0.0.1` are also supported:
 
 ```bash
 # See readme.localtest.me
@@ -54,12 +56,6 @@ http://two.localtest.me:2000
 # See xip.io
 http://one.127.0.0.1.xip.io:2000
 http://two.127.0.0.1.xip.io:2000
-```
-
-To list running servers, go to:
-
-```
-http://localhost:2000
 ```
 
 To set a custom name, add `-n`:
