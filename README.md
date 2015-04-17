@@ -35,14 +35,6 @@ Prefix your commands with `h`:
 Your servers are accessible locally on `http://<name>*:2000` using any host that resolves to `127.0.0.1`, for example:
 
 ```bash
-# Using readme.localtest.me
-http://one.localtest.me:2000
-http://two.localtest.me:2000
-
-# Using xip.io
-http://one.127.0.0.1.xip.io:2000
-http://two.127.0.0.1.xip.io:2000
-
 # Using dnsmasq and a local .dev domain
 http://one.dev:2000
 http://two.dev:2000
@@ -50,6 +42,18 @@ http://two.dev:2000
 # Using /etc/hosts
 http://one:2000
 http://two:2000
+```
+
+You can also use public wildcard domain names that resolves to `127.0.0.1`:
+
+```bash
+# See readme.localtest.me
+http://one.localtest.me:2000
+http://two.localtest.me:2000
+
+# See xip.io
+http://one.127.0.0.1.xip.io:2000
+http://two.127.0.0.1.xip.io:2000
 ```
 
 To list running servers, go to:
