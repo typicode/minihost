@@ -32,7 +32,7 @@ Prefix your commands with `h`:
 ~/two$ h -- npm start
 ```
 
-You can then view your running servers on `http://localhost:2000` and access them locally on `http://<name>*:2000` using any host that resolves to `127.0.0.1`.
+You can then __view your running servers on `http://localhost:2000`__ and __access them locally on `http://<name>*:2000`__ using any host that resolves to `127.0.0.1`.
 
 For example:
 
