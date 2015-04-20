@@ -1,14 +1,14 @@
 {
   "name": "minihost",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "dev utility",
   "main": "lib/h.js",
   "bin": {
     "h": "bin/index.js"
   },
   "preferGlobal": true,
-  "engines" : {
-    "node" : ">= 0.12"
+  "engines": {
+    "node": ">= 0.12"
   },
   "scripts": {
     "test": "mocha",
