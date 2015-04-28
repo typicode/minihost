@@ -35,7 +35,7 @@ http://one:2000
 http://two:2000
 ```
 
-Public wildcard domain names that resolves to `127.0.0.1` are also supported:
+Public wildcard domain names that resolves to `127.0.0.1` are also supported and has the advantage of working out of the box with minihost:
 
 ```bash
 # See readme.localtest.me
