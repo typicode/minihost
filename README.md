@@ -38,9 +38,9 @@ http://two:2000
 Public wildcard domain names that resolves to `127.0.0.1` are also supported and can be used without any system configuration:
 
 ```bash
-# See readme.localtest.me
-http://one.localtest.me:2000
-http://two.localtest.me:2000
+# See til.io
+http://one.til.io:2000
+http://two.til.io:2000
 
 # See xip.io
 http://one.127.0.0.1.xip.io:2000
