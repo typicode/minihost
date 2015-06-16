@@ -27,12 +27,9 @@ For example:
 
 ```bash
 # Using dnsmasq and a local .dev domain
+# Or /etc/hosts
 http://one.dev:2000
 http://two.dev:2000
-
-# Using /etc/hosts
-http://one:2000
-http://two:2000
 ```
 
 Public wildcard domain names that resolves to `127.0.0.1` are also supported and can be used without any system configuration:
