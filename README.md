@@ -50,6 +50,19 @@ To set a custom name, add `-n`:
 ~/one$ h -n app -- nodemon
 ```
 
+To set a custom port environment variable name (instead of default `PORT`), add it after colon in custom name:
+
+```bash
+~/one$ h -n app:APP_PORT -- nodemon
+```
+
+To enable multiple names and ports repeat `-n` option:
+
+```bash
+~/one$ h -n app1:APP1_PORT -n app2:APP_PORT1 -- nodemon
+```
+*If custom env variable names for ports not defined, `PORT_0`, `PORT_1`, `...` will be used.*  
+
 To change the port minihost listens to, run:
 
 ```bash

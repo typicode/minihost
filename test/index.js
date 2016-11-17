@@ -101,6 +101,44 @@ describe('h', function () {
     })
   })
 
+  describe('--name with custom env var for port', function () {
+    before(function (done) {
+      h('--name some:CUSTOM_PORT -- node index-custom-port-env.js')
+      setTimeout(done, timeout)
+    })
+
+    it('should make the server available under another name', function (done) {
+      request
+        .get('/')
+        .set('Host', 'some.127.0.0.1.xip.io')
+        .expect('OK')
+        .end(done)
+    })
+  })
+
+  describe('multiple --name', function () {
+    before(function (done) {
+      h('--name one --name two -- node index-multiple.js')
+      setTimeout(done, timeout)
+    })
+
+    it('should make the server available under another name - one', function (done) {
+      request
+        .get('/')
+        .set('Host', 'one.127.0.0.1.xip.io')
+        .expect('OK')
+        .end(done)
+    })
+
+    it('should make the server available under another name - two', function (done) {
+      request
+        .get('/')
+        .set('Host', 'two.127.0.0.1.xip.io')
+        .expect('OK')
+        .end(done)
+    })
+  })
+
   describe('-- \'cmd $PORT\'', function () {
     before(function (done) {
       h('--name three -- \'node index-argv.js $PORT\'')
@@ -129,8 +167,9 @@ describe('h', function () {
 
   describe('when all processes are killed', function () {
     before(function (done) {
-      procs[1].kill()
-      procs[2].kill()
+      procs.forEach(function (proc) {
+        proc.kill()
+      })
       setTimeout(done, timeout)
     })
 
